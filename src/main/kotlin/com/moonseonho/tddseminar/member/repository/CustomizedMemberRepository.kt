@@ -4,5 +4,5 @@ import com.moonseonho.tddseminar.member.dto.MyInfoResponseDto
 
 interface CustomizedMemberRepository {
 
-    fun getMember(email: String): MyInfoResponseDto?
+    fun getMemberInfo(memberId: Long): MyInfoResponseDto?
 }

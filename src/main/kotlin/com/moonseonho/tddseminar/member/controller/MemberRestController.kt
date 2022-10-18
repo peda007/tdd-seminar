@@ -1,6 +1,6 @@
 package com.moonseonho.tddseminar.member.controller
 
-import com.moonseonho.tddseminar.common.dto.CreationResponseDto
+import com.moonseonho.tddseminar.common.dto.CreatedResponseDto
 import com.moonseonho.tddseminar.member.dto.JoinRequestDto
 import com.moonseonho.tddseminar.member.dto.MyInfoResponseDto
 import com.moonseonho.tddseminar.member.service.MemberService
@@ -19,14 +19,14 @@ class MemberRestController(
 ) {
 
     @PostMapping
-    fun join(@RequestBody joinRequestDto: JoinRequestDto): ResponseEntity<CreationResponseDto> {
+    fun join(@RequestBody joinRequestDto: JoinRequestDto): ResponseEntity<CreatedResponseDto> {
         val memberId = memberService.join(joinRequestDto)
-        return ResponseEntity.ok(CreationResponseDto(memberId))
+        return ResponseEntity.ok(CreatedResponseDto(memberId))
     }
 
-    @GetMapping("/{email}")
-    fun getMyInfo(@PathVariable email: String): ResponseEntity<MyInfoResponseDto> {
-        val myInfo = memberService.getMyInfo(email)
+    @GetMapping("/{memberId}")
+    fun getMyInfo(@PathVariable memberId: Long): ResponseEntity<MyInfoResponseDto> {
+        val myInfo = memberService.getMyInfo(memberId)
         return ResponseEntity.ok(myInfo)
     }
 }

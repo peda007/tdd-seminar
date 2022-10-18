@@ -12,8 +12,8 @@ class MemberService(
 ) {
 
     @Transactional(readOnly = true)
-    fun getMyInfo(email: String): MyInfoResponseDto {
-        return memberRepository.getMember(email) ?: throw IllegalStateException("존재하지 않는 회원입니다")
+    fun getMyInfo(memberId: Long): MyInfoResponseDto {
+        return memberRepository.getMemberInfo(memberId) ?: throw IllegalStateException("존재하지 않는 회원입니다.")
     }
 
     @Transactional

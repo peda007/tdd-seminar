@@ -9,7 +9,7 @@ class CustomizedMemberRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory
 ) : CustomizedMemberRepository {
 
-    override fun getMember(email: String): MyInfoResponseDto? {
+    override fun getMemberInfo(memberId: Long): MyInfoResponseDto? {
         return jpaQueryFactory
             .select(
                 Projections.fields(
@@ -21,7 +21,7 @@ class CustomizedMemberRepositoryImpl(
                 )
             )
             .from(member)
-            .where(member.email.eq(email))
+            .where(member.id.eq(memberId))
             .fetchOne()
     }
 }

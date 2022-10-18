@@ -1,6 +1,6 @@
 package com.moonseonho.tddseminar.common.dto
 
-data class CreationResponseDto(
+data class CreatedResponseDto(
 
     val createdId: Long
 )
