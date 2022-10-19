@@ -28,7 +28,7 @@ class Member(
 
     companion object {
         fun accountWith(email: String?, password: String?): Member {
-            requireNotNull(email)
+            require(!email.isNullOrBlank())
             requireNotNull(password)
             return Member(email = email, password = password)
         }

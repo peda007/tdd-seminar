@@ -13,15 +13,20 @@ class MemberAcceptanceTest : AcceptanceTest() {
 
     @Test
     fun `회원 가입한 뒤 아이디로 조회하면 내 계정이 조회된다`() {
+        // given
         val email = "email"
         val joinRequestDto = JoinRequestDto(email, "pass")
+
+        // when
         val joinResponse = request(Method.POST, "/members", joinRequestDto)
         val joinResponseDto = joinResponse.to<CreatedResponseDto>()
 
         val getMyInfoResponse = request(Method.GET, "/members/${joinResponseDto.createdId}")
         val myInfoResponseDto = getMyInfoResponse.to<MyInfoResponseDto>()
 
+        // then
         assertThat(myInfoResponseDto.id).isEqualTo(1L)
         assertThat(myInfoResponseDto.email).isEqualTo(email)
     }
+
 }

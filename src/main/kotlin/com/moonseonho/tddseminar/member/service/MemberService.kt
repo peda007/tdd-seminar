@@ -1,6 +1,7 @@
 package com.moonseonho.tddseminar.member.service
 
 import com.moonseonho.tddseminar.member.dto.JoinRequestDto
+import com.moonseonho.tddseminar.member.dto.LoginRequestDto
 import com.moonseonho.tddseminar.member.dto.MyInfoResponseDto
 import com.moonseonho.tddseminar.member.repository.MemberRepository
 import org.springframework.stereotype.Service
@@ -20,5 +21,13 @@ class MemberService(
     fun join(joinRequestDto: JoinRequestDto): Long {
         val member = memberRepository.save(joinRequestDto.toMember())
         return member.id
+    }
+
+    fun login(loginRequestDto: LoginRequestDto) {
+        val regex = Regex("[a-zA-Z]{3,}")
+        require(!loginRequestDto.password.isNullOrBlank()) { "password가 null일 수 없습니다" }
+        if (!loginRequestDto.password.matches(regex)) {
+            throw RuntimeException("영문자가 부족하대요")
+        }
     }
 }
